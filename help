@@ -1,0 +1,34 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    help                                               :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jereligi <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/03/11 14:32:28 by jereligi          #+#    #+#              #
+#    Updated: 2020/03/11 14:34:32 by jereligi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+brew cask install virtualbox
+brew install kubectl
+brew install minikube
+mv ./minikube /goinfre/jereligi
+cd /goinfre/jereligi
+ln -s /goinfre/jereligi/.minikube /Users/jereligi/.minikube
+mkdir /goinfre/jereligi/.minikube
+minikube start --vm-driver=virtualbox --disk-size=5000MB
+minikube dashboard
+eval $(minikube docker-env)
+
+
+# Docker
+- build image
+docker build -t name_image path_Dockerfile
+
+exemple : docker build -t alpine_nginx .
+
+- Run image
+docker run -it -p 80:80 alpine_nginx
+
+exemple : docker run -it -p 21:21 -p 21000-21010:21000-21010 alpineftp
