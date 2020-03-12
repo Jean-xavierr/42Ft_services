@@ -6,7 +6,7 @@
 #    By: jereligi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/11 14:32:28 by jereligi          #+#    #+#              #
-#    Updated: 2020/03/11 14:34:32 by jereligi         ###   ########.fr        #
+#    Updated: 2020/03/12 11:39:08 by jereligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,3 +32,24 @@ exemple : docker build -t alpine_nginx .
 docker run -it -p 80:80 alpine_nginx
 
 exemple : docker run -it -p 21:21 -p 21000-21010:21000-21010 alpineftp
+
+- Kill container
+docker kill IDcontaine
+
+docker ps
+docker stop
+docker image rm ID
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+Kubernetes
+
+kubectl ...
+kubectl get deployment
+kubectl get pods
+kubectl get service
+kubectl delete deployment name
+
+minikube dashboard
+minikube service <nom du service> --url

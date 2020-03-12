@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpine-deployment
+  labels:
+    app: ftps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ftps
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      containers:
+      - name: alpine-ftps
+        image: alpine_ftp:1.0
+        ports:
+        - containerPort: 21
+          hostPort: 21
+        - containerPort: 21000
+          hostPort: 21000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftp-service
+  labels:
+    app: ftps
+spec:
+  ports:
+    - port: 21
+      protocol: TCP
+      name: ftps-app
+    - port: 21000
+      protocol: TCP
+      name: ftps-data
+  selector:
+    app: ftps

@@ -6,12 +6,10 @@
 #    By: jereligi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/11 14:31:51 by jereligi          #+#    #+#              #
-#    Updated: 2020/03/11 14:31:57 by jereligi         ###   ########.fr        #
+#    Updated: 2020/03/12 14:39:48 by jereligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-mkdir /src/ftp
-mkdir /src/ftp/jereligi
 echo -e "test2018\ntest2018" | adduser -h /src/ftp/jereligi jereligi
 mkdir -p /src/ftp/jereligi
 chown jereligi /src/ftp/jereligi
