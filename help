@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    help                                               :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jereligi <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: jereligi <jereligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/11 14:32:28 by jereligi          #+#    #+#              #
-#    Updated: 2020/03/12 11:39:08 by jereligi         ###   ########.fr        #
+#    Updated: 2020/08/19 14:52:26 by jereligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,12 @@ docker rm $(docker ps -a -q)
 Kubernetes
 
 kubectl ...
+kubectl apply -f pod.yaml
+kubectl create -f pod.yaml (lancer un pod/service/deployment)
+kubectl exec -t -i name -- /bin/bash (shell interactif dans le container)
 kubectl get deployment
-kubectl get pods
+kubectl get pods (list les pods)
+kubectl describe pod/name (affiche tout les informations sur le pod)
 kubectl get service
 kubectl delete deployment name
 
