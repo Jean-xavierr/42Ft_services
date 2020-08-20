@@ -45,6 +45,7 @@ function_install_virtualbox()
 
 function_move_docker_goinfre()
 {
+	cd
 	rm -rf ~/Library/Containers/com.docker.docker ~/.docker
     mkdir -p /goinfre/"$USER"/docker/{com.docker.docker,.docker}
     ln -sf /goinfre/"$USER"/docker/com.docker.docker ~/Library/Containers/com.docker.docker
@@ -56,8 +57,10 @@ function_install_docker()
 	if [ $1 == "42Mac" ]; then
 		if [ -d "/Applications/Docker.app" ]; then
 			printf "Docker installed 🐳\n"
-			if [ "$(ls -la | grep .docker | cut -d \" \" -f 18-99)" != ".docker -> /goinfre/\"$USER\"/docker/.docker" ] && [ ! -d "/goinfre/\"$USER\"/.docker" ]; then
+			if [ "$(cd ; ls -la | grep .docker | cut -d " " -f 18-99)" != ".docker -> /goinfre/\"$USER\"/docker/.docker" ] && [ ! -d "/goinfre/\"$USER\"/.docker" ]; then
 				function_move_docker_goinfre
+			else
+				open -a Docker && sleep 5
 			fi
 		else
 			printf "Please install ${Light_red}Docker"
@@ -92,16 +95,26 @@ function_install_kubernetes()
 	printf "Kubernetes installed 🐳\n"
 }
 
+function_move_minikube_goinfre()
+{
+	cd
+	mv ./minikube /goinfre/\"$USER\"
+	cd /goinfre/\"$USER\"
+	ln -s /goinfre/\"$USER\"/.minikube /Users/\"$USER\"/.minikube
+	mkdir /goinfre/\"$USER\"/.minikube
+}
+
 function_install_minikube()
 {
-	# Install Minikube
-	#---------------------------------------------------------------------------
-	# if [ ]
-	brew install minikube
-	# mv ./minikube /goinfre/"$USER"
-	# cd /goinfre/"$USER"
-	# ln -s /goinfre/"$USER/.minikube /Users/"$USER/.minikube
-	# mkdir /goinfre/"$USER"/.minikube
+	if [ "$1" == "42Mac" ]; then
+		if [ "$(brew list | grep minikube)" != "minikube" ]; then
+			brew install minikube
+			function_move_minikube_goinfre
+		elif [ "$(cd ; ls -la | grep .minikube | cut -d " " -f 18-99)" != ".minikube -> /goinfre/$USER/.minikub" ]; then
+			function_move_minikube_goinfre
+		fi
+	fi
+	printf "Minikube installed 🐳\n"
 }
 
 function_management_install()
@@ -110,6 +123,7 @@ function_management_install()
 	function_install_docker "$1"
 	function_install_brew "$1"
 	function_install_kubernetes
+	function_install_minikube
 }
 
 function_print_usage()
