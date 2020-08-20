@@ -45,11 +45,10 @@ function_install_virtualbox()
 
 function_move_docker_goinfre()
 {
-	cd
 	rm -rf ~/Library/Containers/com.docker.docker ~/.docker
-    mkdir -p /goinfre/"$USER"/docker/{com.docker.docker,.docker}
-    ln -sf /goinfre/"$USER"/docker/com.docker.docker ~/Library/Containers/com.docker.docker
-    ln -sf /goinfre/"$USER"/docker/.docker ~/.docker
+    mkdir -p /Volumes/Storage/goinfre/$USER/docker/{com.docker.docker,.docker}
+    ln -sf /Volumes/Storage/goinfre/$USER/docker/com.docker.docker ~/Library/Containers/com.docker.docker
+    ln -sf /Volumes/Storage/goinfre/$USER/docker/.docker ~/.docker
 }
 
 function_install_docker()
@@ -57,7 +56,7 @@ function_install_docker()
 	if [ $1 == "42Mac" ]; then
 		if [ -d "/Applications/Docker.app" ]; then
 			printf "Docker installed 🐳\n"
-			if [ "$(cd ; ls -la | grep .docker | cut -d " " -f 18-99)" != ".docker -> /goinfre/\"$USER\"/docker/.docker" ] && [ ! -d "/goinfre/\"$USER\"/.docker" ]; then
+			if [ "$(ls -la ~ | grep .docker | cut -d " " -f 18-99)" != ".docker -> /Volumes/Storage/goinfre/$USER/docker/.docker" ] || [ ! -d "/Volumes/Storage/goinfre/$USER/.docker" ]; then
 				function_move_docker_goinfre
 			else
 				open -a Docker && sleep 5
@@ -97,11 +96,9 @@ function_install_kubernetes()
 
 function_move_minikube_goinfre()
 {
-	cd
-	mv ./minikube /goinfre/\"$USER\"
-	cd /goinfre/\"$USER\"
-	ln -s /goinfre/\"$USER\"/.minikube /Users/\"$USER\"/.minikube
-	mkdir /goinfre/\"$USER\"/.minikube
+	mv ~/.minikube /Volumes/Storage/goinfre/$USER/
+	ln -sf /Volumes/Storage/goinfre/$USER/.minikube /Users/$USER/.minikube
+	mkdir /Volumes/Storage/goinfre/$USER/.minikube
 }
 
 function_install_minikube()
@@ -110,7 +107,7 @@ function_install_minikube()
 		if [ "$(brew list | grep minikube)" != "minikube" ]; then
 			brew install minikube
 			function_move_minikube_goinfre
-		elif [ "$(cd ; ls -la | grep .minikube | cut -d " " -f 18-99)" != ".minikube -> /goinfre/$USER/.minikub" ]; then
+		elif [ "$(ls -la ~ | grep .minikube | cut -d " " -f 18-99)" != ".minikube -> /Volumes/Storage/goinfre/$USER/.minikube" ] || [ ! -d "/Volumes/Storage/goinfre/$USER/.minikube" ]; then
 			function_move_minikube_goinfre
 		fi
 	fi
@@ -123,7 +120,7 @@ function_management_install()
 	function_install_docker "$1"
 	function_install_brew "$1"
 	function_install_kubernetes
-	function_install_minikube
+	function_install_minikube $1
 }
 
 function_print_usage()
