@@ -67,7 +67,9 @@ function_install_docker()
 			# function_install_docker 
 		fi
 	else
-		printf "🐳 : Install Docker on 42VM\n"
+		printf "🤖 : Install Docker\n"
+		brew install docker
+		printf "🐳 : Docker installed\n"
 	fi
 }
 
@@ -81,6 +83,10 @@ function_install_brew()
 			source $HOME/.zshrc &
 			brew update
 		fi
+	else
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+		echo "export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH" >> ~/.zshrc
+		export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH
 		printf "✅ : brew installed\n"
 	fi
 }
@@ -118,8 +124,8 @@ function_management_install()
 	if [ $1 == "42Mac" ]; then
 		function_install_virtualbox "$1"
 	fi
-	function_install_docker "$1"
 	function_install_brew "$1"
+	function_install_docker "$1"
 	function_install_kubernetes
 	function_install_minikube $1
 }
