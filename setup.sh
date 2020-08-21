@@ -28,18 +28,15 @@ Default_color="\e[39m"	#--------- Default color
 
 function_install_virtualbox()
 {
-	# cat test > /dev/null 2>&1
 	if [ "$(VboxManage > /dev/null && echo $?)" == "0" ]; then
-			printf "VirtualBox installed\n"
+			printf "✅ : VirtualBox installed\n"
 	else
-		if [ $1 == "42Mac" ]; then
-			printf "${Yellow}Warning :${Default_color} Please install ${Light_red}VirtualBox"
-			printf "for Mac from the MSC (Managed Software Center)${Default_color} ❗\n"
-			open -a "Managed Software Center"
-			printf "\t  "
-			read -p Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ VirtualBox\ for\ Mac\ ...
-			printf "\n"
-		fi
+		printf "${Yellow}Warning :${Default_color} Please install ${Light_red}VirtualBox"
+		printf "for Mac from the MSC (Managed Software Center)${Default_color} ❗\n"
+		open -a "Managed Software Center"
+		printf "\t  "
+		read -p Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ VirtualBox\ for\ Mac\ ...
+		printf "\n"
 	fi
 }
 
@@ -55,21 +52,22 @@ function_install_docker()
 {
 	if [ $1 == "42Mac" ]; then
 		if [ -d "/Applications/Docker.app" ]; then
-			printf "Docker installed 🐳\n"
+			printf "🐳 : Docker installed\n"
 			if [ "$(ls -la ~ | grep .docker | cut -d " " -f 18-99)" != ".docker -> /Volumes/Storage/goinfre/$USER/docker/.docker" ] || [ ! -d "/Volumes/Storage/goinfre/$USER/.docker" ]; then
 				function_move_docker_goinfre
 			else
 				open -a Docker && sleep 5
 			fi
 		else
-			printf "Please install ${Light_red}Docker"
-			printf "for Mac from the MSC (Managed Software Center)${Default_color} ❗\n"
+			printf "❗ : Please install ${Light_red}Docker"
+			printf "for Mac from the MSC (Managed Software Center)${Default_color}\n"
 			open -a "Managed Software Center"
-			read -p Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ Docker\ for\ Mac\ ...
-			function_move_docker_goinfre 
+			read -p ❗\ :\ Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ Docker\ for\ Mac\ ...
+			function_move_docker_goinfre
+			# function_install_docker 
 		fi
 	else
-		printf "Install Docker on 42VM"
+		printf "🐳 : Install Docker on 42VM\n"
 	fi
 }
 
@@ -83,6 +81,7 @@ function_install_brew()
 			source $HOME/.zshrc &
 			brew update
 		fi
+		printf "✅ : brew installed\n"
 	fi
 }
 
@@ -91,7 +90,7 @@ function_install_kubernetes()
 	if [ "$(brew list | grep kubernetes-cli)" != "kubernetes-cli" ]; then
 		brew install kubernetes-cli
 	fi
-	printf "Kubernetes installed 🐳\n"
+	printf "🐳 : Kubernetes installed\n"
 }
 
 function_move_minikube_goinfre()
@@ -111,12 +110,14 @@ function_install_minikube()
 			function_move_minikube_goinfre
 		fi
 	fi
-	printf "Minikube installed 🐳\n"
+	printf "🐳 : Minikube installed\n"
 }
 
 function_management_install()
 {
-	function_install_virtualbox "$1"
+	if [ $1 == "42Mac" ]; then
+		function_install_virtualbox "$1"
+	fi
 	function_install_docker "$1"
 	function_install_brew "$1"
 	function_install_kubernetes
@@ -134,7 +135,13 @@ function_print_usage()
 function_main()
 {
 	# Visuel print
-	printf "\nScript to setup Kubernetes and Docker "
+	printf "\n\n███████╗████████╗     ███████╗███████╗██████╗ ██╗   ██╗██╗ ██████╗███████╗███████╗
+██╔════╝╚══██╔══╝     ██╔════╝██╔════╝██╔══██╗██║   ██║██║██╔════╝██╔════╝██╔════╝
+█████╗     ██║        ███████╗█████╗  ██████╔╝██║   ██║██║██║     █████╗  ███████╗
+██╔══╝     ██║        ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║██║     ██╔══╝  ╚════██║
+██║        ██║███████╗███████║███████╗██║  ██║ ╚████╔╝ ██║╚██████╗███████╗███████║
+╚═╝        ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝ ╚═════╝╚══════╝╚══════╝"
+	printf "\n\n🤖 Script to setup Kubernetes and Docker "
 	for _ in $(seq 0 2)
 	do
 		printf "." && sleep 0.5
@@ -150,10 +157,10 @@ function_main()
 		function_print_usage
 	else
 		if [ "$1" == "42Mac" ]; then
-			printf "Function %s 🍎\n\n" "$1"
+			printf "🍎 : Function %s\n\n" "$1"
 			function_management_install "$1"
 		elif [ "$1" == "42Linux" ]; then
-			printf "Function %s 🐧\n\n" "$1"
+			printf "🐧 : Function %s\n\n" "$1"
 			function_management_install "$1"
 		fi
 	fi
