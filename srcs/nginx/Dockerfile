@@ -12,10 +12,10 @@ RUN chmod +x setup_nginx.sh
 RUN mkdir www
 ADD index.html /www/index.html
 
-# KEY SSH
+# KEY OPENSSL
 ADD nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.crt
 ADD nginx-selfsigned.key /etc/ssl/private/nginx-selfsigned.key
 
 EXPOSE 80 443 301
 
-# CMD ["sh", "./setup_nginx.sh"]
+CMD ["sh", "./setup_nginx.sh"]
