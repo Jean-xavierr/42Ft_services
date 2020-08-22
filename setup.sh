@@ -68,7 +68,7 @@ function_install_docker()
 		fi
 	else
 		printf "🤖 : Install Docker\n"
-		brew install docker
+		brew install docker &> /dev/null
 		printf "🐳 : Docker installed\n"
 	fi
 }
@@ -84,7 +84,9 @@ function_install_brew()
 			brew update
 		fi
 	else
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+	 	printf "🤖 : Install Brew\n"
+		echo "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" &> /dev/null
+
 		echo "export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH" >> ~/.zshrc
 		export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH
 		printf "✅ : brew installed\n"
