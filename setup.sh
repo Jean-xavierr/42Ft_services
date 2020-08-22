@@ -28,16 +28,17 @@ Default_color="\e[39m"	#--------- Default color
 
 function_load_animation()
 {
+	sleep 5
 	spin='-\|/'
 	# i=0
 	while kill -0 $1 2>/dev/null
 	do
 		# i=$(( (i+1) %4 ))
 		# printf "\r${spin:$i:1}"
-	  	printf "\r${spin:i++%${#spin}:1}"
+		printf "\r🤖 : Install in progress "
+	  	printf "${spin:i++%${#spin}:1}"
 	  	sleep .1
 	done
-	printf "\b"
 }
 
 function_install_virtualbox()
@@ -99,7 +100,9 @@ function_install_brew()
 		fi
 	else
 	 	printf "🤖 : Install Brew\n"
-		echo "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" &> /dev/null & function_load_animation
+		echo "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" &> /dev/null & 
+		function_load_animation $!
+		printf "\b \n"
 		echo "export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH" >> ~/.zshrc
 		export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH
 		printf "✅ : brew installed\n"
