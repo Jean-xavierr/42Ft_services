@@ -57,3 +57,5 @@ kubectl delete deployment name
 
 minikube dashboard
 minikube service <nom du service> --url
+
+snapshot VM
