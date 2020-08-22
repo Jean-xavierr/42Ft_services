@@ -28,7 +28,7 @@ Default_color="\e[39m"	#--------- Default color
 
 function_load_animation()
 {
-	sleep 5
+	sleep 5.5
 	spin='-\|/'
 	# i=0
 	while kill -0 $1 2>/dev/null
@@ -83,7 +83,9 @@ function_install_docker()
 		fi
 	else
 		printf "🤖 : Install Docker\n"
-		brew install docker &> /dev/null
+		brew install docker &> /dev/null & 
+		function_load_animation $!
+		printf "\b \n"
 		printf "🐳 : Docker installed\n"
 	fi
 }
@@ -133,6 +135,11 @@ function_install_minikube()
 		elif [ "$(ls -la ~ | grep .minikube | cut -d " " -f 18-99)" != ".minikube -> /Volumes/Storage/goinfre/$USER/.minikube" ] || [ ! -d "/Volumes/Storage/goinfre/$USER/.minikube" ]; then
 			function_move_minikube_goinfre
 		fi
+	else
+		printf "🤖 : Install Minikube\n"
+		brew install minikube &> /dev/null  & 
+		function_load_animation $!
+		printf "\b \n"
 	fi
 	printf "🐳 : Minikube installed\n"
 }
@@ -144,7 +151,7 @@ function_management_install()
 	fi
 	function_install_brew "$1"
 	function_install_docker "$1"
-	function_install_kubernetes
+	# function_install_kubernetes
 	function_install_minikube $1
 }
 
@@ -159,6 +166,7 @@ function_print_usage()
 function_main()
 {
 	# Visuel print
+	clear
 	printf "\n\n███████╗████████╗     ███████╗███████╗██████╗ ██╗   ██╗██╗ ██████╗███████╗███████╗
 ██╔════╝╚══██╔══╝     ██╔════╝██╔════╝██╔══██╗██║   ██║██║██╔════╝██╔════╝██╔════╝
 █████╗     ██║        ███████╗█████╗  ██████╔╝██║   ██║██║██║     █████╗  ███████╗
