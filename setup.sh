@@ -26,6 +26,20 @@ Default_color="\e[39m"	#--------- Default color
 # Function Script
 ################################################################################
 
+function_load_animation()
+{
+	spin='-\|/'
+	# i=0
+	while kill -0 $1 2>/dev/null
+	do
+		# i=$(( (i+1) %4 ))
+		# printf "\r${spin:$i:1}"
+	  	printf "\r${spin:i++%${#spin}:1}"
+	  	sleep .1
+	done
+	printf "\b"
+}
+
 function_install_virtualbox()
 {
 	if [ "$(VboxManage > /dev/null && echo $?)" == "0" ]; then
@@ -85,8 +99,7 @@ function_install_brew()
 		fi
 	else
 	 	printf "🤖 : Install Brew\n"
-		echo "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" &> /dev/null
-
+		echo "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" &> /dev/null & function_load_animation
 		echo "export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH" >> ~/.zshrc
 		export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH
 		printf "✅ : brew installed\n"
