@@ -64,53 +64,81 @@ function_move_docker_goinfre()
 
 function_install_docker()
 {
-	if [ -d "/Applications/Docker.app" ]; then
-		if [ "$(ls -la ~ | grep .docker | cut -d " " -f 18-99)" != ".docker -> /Volumes/Storage/goinfre/$USER/docker/.docker" ] || [ ! -d "/Volumes/Storage/goinfre/$USER/.docker" ]; then
-			function_move_docker_goinfre
+	if [ $1 == "42Mac" ]; then
+		if [ -d "/Applications/Docker.app" ]; then
+			printf "🐳 : Docker installed\n"
+			if [ "$(ls -la ~ | grep .docker | cut -d " " -f 18-99)" != ".docker -> /Volumes/Storage/goinfre/$USER/docker/.docker" ] || [ ! -d "/Volumes/Storage/goinfre/$USER/.docker" ]; then
+				function_move_docker_goinfre
+			else
+				open -a Docker && sleep 5
+			fi
 		else
-			open -a Docker && sleep 5
+			printf "❗ : Please install ${Light_red}Docker"
+			printf "for Mac from the MSC (Managed Software Center)${Default_color}\n"
+			open -a "Managed Software Center"
+			read -p ❗\ :\ Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ Docker\ for\ Mac\ ...
+			function_move_docker_goinfre
+			# function_install_docker 
 		fi
 	else
-		printf "❗ : Please install ${Light_red}Docker"
-		printf "for Mac from the MSC (Managed Software Center)${Default_color}\n"
-		open -a "Managed Software Center"
-		read -p ❗\ :\ Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ Docker\ for\ Mac\ ...
-		function_move_docker_goinfre
-		# function_install_docker 
+		printf "🤖 : Install Docker\n"
+		brew install docker &> /dev/null & 
+		function_load_animation $!
+		printf "\b \n"
+		printf "🐳 : Docker installed\n"
 	fi
-	printf "🐳 : Docker installed\n"
 }
 
 function_install_brew()
 {
-	if [ "$(brew list > /dev/null 2>&1 && echo $?)" != "0" ]; then
-		rm -rf $HOME/.brew &
-		git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew &
-		echo 'export PATH=$HOME/.brew/bin:$PATH' >> $HOME/.zshrc &
-		source $HOME/.zshrc &
-		brew update
+	if [ "$1" == "42Mac" ]; then
+		if [ "$(brew list > /dev/null 2>&1 && echo $?)" != "0" ]; then
+			rm -rf $HOME/.brew &
+			git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew &
+			echo 'export PATH=$HOME/.brew/bin:$PATH' >> $HOME/.zshrc &
+			source $HOME/.zshrc &
+			brew update
+		fi
+	else
+	 	printf "🤖 : Install Brew\n"
+		echo "\n" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" &> /dev/null & 
+		function_load_animation $!
+		printf "\b \n"
+		echo "export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH" >> ~/.zshrc
+		export PATH=/home/linuxbrew/.linuxbrew/Homebrew/bin:$PATH
+		printf "✅ : brew installed\n"
 	fi
-	printf "🤖 : Brew installed\n"
+}
+
+function_install_kubernetes()
+{
+	if [ "$(brew list | grep kubernetes-cli)" != "kubernetes-cli" ]; then
+		brew install kubernetes-cli
+	fi
+	printf "🐳 : Kubernetes installed\n"
 }
 
 function_move_minikube_goinfre()
 {
-	mv ~/.minikube /Volumes/Storage/goinfre/$USER/ &> /dev/null
+	mv ~/.minikube /Volumes/Storage/goinfre/$USER/
 	ln -sf /Volumes/Storage/goinfre/$USER/.minikube /Users/$USER/.minikube
-	mkdir /Volumes/Storage/goinfre/$USER/.minikube &> /dev/null
+	mkdir /Volumes/Storage/goinfre/$USER/.minikube
 }
 
 function_install_minikube()
 {
-
-	if [ "$(brew list | grep minikube)" != "minikube" ]; then
+	if [ "$1" == "42Mac" ]; then
+		if [ "$(brew list | grep minikube)" != "minikube" ]; then
+			brew install minikube
+			function_move_minikube_goinfre
+		elif [ "$(ls -la ~ | grep .minikube | cut -d " " -f 18-99)" != ".minikube -> /Volumes/Storage/goinfre/$USER/.minikube" ] || [ ! -d "/Volumes/Storage/goinfre/$USER/.minikube" ]; then
+			function_move_minikube_goinfre
+		fi
+	else
 		printf "🤖 : Install Minikube\n"
-		brew install minikube &> /dev/null & 
+		brew install minikube &> /dev/null  & 
 		function_load_animation $!
 		printf "\b \n"
-		function_move_minikube_goinfre
-	elif [ "$(ls -la ~ | grep .minikube | cut -d " " -f 18-99)" != ".minikube -> /Volumes/Storage/goinfre/$USER/.minikube" ] || [ ! -d "/Volumes/Storage/goinfre/$USER/.minikube" ]; then
-		function_move_minikube_goinfre
 	fi
 	printf "🐳 : Minikube installed\n"
 }
@@ -119,10 +147,11 @@ function_management_install()
 {
 	if [ $1 == "42Mac" ]; then
 		function_install_virtualbox "$1"
-		function_install_brew "$1"
-		function_install_docker "$1"
-		function_install_minikube $1
 	fi
+	function_install_brew "$1"
+	function_install_docker "$1"
+	# function_install_kubernetes
+	function_install_minikube $1
 }
 
 function_print_usage()
