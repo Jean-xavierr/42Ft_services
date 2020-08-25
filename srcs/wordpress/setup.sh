@@ -3,8 +3,8 @@ cat << EOF > wp-config.php
 <?php
 # Config Mariadb | database
 
-define('DB_NAME', 'wordpress');
-define('DB_USER', 'wp_user');
+define('DB_NAME', '$WP_DB_NAME');
+define('DB_USER', '$WP_USER');
 define('DB_PASSWORD', '$PASSWORD');
 define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
