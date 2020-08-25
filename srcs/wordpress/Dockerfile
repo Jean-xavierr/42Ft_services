@@ -10,12 +10,9 @@ php7-mbstring php7-json php7-session
 RUN wget https://wordpress.org/latest.tar.gz \
 && tar -xvf latest.tar.gz \
 && rm latest.tar.gz \
-&& mv wordpress/* /www \
-&& rm -rf wordpress \
-&& rm -rf /var/cache/apk/*
+&& mv wordpress/ www/
 
-ADD setup.sh 			/srcs/setup.sh
-ADD wp-config.php		/www/wp-config.php
+ADD setup.sh 	/srcs/setup.sh
 
 EXPOSE 5050
 
