@@ -6,6 +6,5 @@ RUN apk update \
 && apk add mariadb mariadb-client openrc
 
 ADD setup.sh 		/srcs/setup.sh
-ADD create_database /srcs/create_database
 
-CMD ["sh", "/srcs/setup.sh"]
+# CMD ["sh", "/srcs/setup.sh"]
