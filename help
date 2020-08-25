@@ -6,7 +6,7 @@
 #    By: jereligi <jereligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/11 14:32:28 by jereligi          #+#    #+#              #
-#    Updated: 2020/08/24 17:19:04 by jereligi         ###   ########.fr        #
+#    Updated: 2020/08/25 18:28:11 by jereligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,13 @@ docker run -it -p 80:80 alpine_nginx
 exemple : docker run -it -p 21:21 -p 21000-21010:21000-21010 alpineftp
 
 - ajouter des variables env dans docker
-docker run -it -p 80:80 -e USER=jereligi alpine_nginx
+exemple : docker run -it -p 80:80 -e USER=jereligi alpine_nginx
+
+- donner une ip a un container
+exemple : docker run --network="bridge" -t alpine_wordpress .
+
+- inspecter un container
+docker inspect ID
 
 - Kill container
 docker kill IDcontaine
