@@ -1,12 +1,12 @@
 # Config wp-config.php (database mariadb)
-cat << EOF > wp-config.php
+cat << EOF > /www/wordpress/wp-config.php
 <?php
 # Config Mariadb | database
 
 define('DB_NAME', '$WP_DB_NAME');
 define('DB_USER', '$WP_USER');
 define('DB_PASSWORD', '$PASSWORD');
-define('DB_HOST', 'localhost');
+define('DB_HOST', '$MYSQL_IP');
 define('DB_CHARSET', 'utf8');
 define('FS_METHOD', 'direct');
 define('DB_COLLATE', '');
@@ -31,6 +31,13 @@ if ( !defined('ABSPATH') )
 require_once(ABSPATH . 'wp-settings.php');
 ?>
 EOF
+
+# connect to mariadb
+# openrc
+# touch /run/openrc/softlevel
+# /etc/init.d/mariadb setup
+# rc-service mariadb start
+# mysql -h ip -u wp_user -p
 
 # PHP SERVER
 php -S 0.0.0.0:5050 -t /www/wordpress
