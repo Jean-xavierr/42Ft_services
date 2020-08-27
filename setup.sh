@@ -115,13 +115,25 @@ function_install_minikube()
 	printf "🐳 : Minikube installed\n"
 }
 
+function_docker_build()
+{
+	services="nginx ftps mysql wordpress phpmyadmin influxdb grafana"
+	for service in $services
+	do
+		printf "\n\n🤖 : docker build srcs/$service -t alpine_$service\n"
+		docker build srcs/$service -t alpine_$service
+	done
+	printf "\n🤖 : ${Green}Images docker build${Default_color} 🐳\n"
+}
+
 function_management_install()
 {
 	if [ $1 == "42Mac" ]; then
-		function_install_virtualbox "$1"
-		function_install_brew "$1"
-		function_install_docker "$1"
-		function_install_minikube $1
+		# function_install_virtualbox "$1"
+		# function_install_brew "$1"
+		# function_install_docker "$1"
+		# function_install_minikube $1
+		function_docker_build
 	fi
 }
 
