@@ -9,4 +9,4 @@ ADD setup.sh 		/srcs/setup.sh
 
 EXPOSE 3306
 
-# CMD ["sh", "/srcs/setup.sh"]
+CMD ["sh", "/srcs/setup.sh"]

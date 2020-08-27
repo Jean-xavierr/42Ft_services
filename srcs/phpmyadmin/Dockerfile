@@ -19,4 +19,4 @@ ADD config.inc.php		/www/phpmyadmin
 
 EXPOSE 5000
 
-# CMD ["sh", "/srcs/setup.sh"]
+CMD ["sh", "/srcs/setup.sh"]

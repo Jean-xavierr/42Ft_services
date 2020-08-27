@@ -13,4 +13,4 @@ ADD setup.sh /srcs/setup.sh
 
 EXPOSE 8086
 
-# CMD ["sh", "/srcs/setup.sh"]
+CMD ["sh", "/srcs/setup.sh"]

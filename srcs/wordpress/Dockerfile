@@ -17,4 +17,4 @@ ADD setup.sh 	/srcs/setup.sh
 
 EXPOSE 5050
 
-# CMD ["sh", "/srcs/setup.sh"]
+CMD ["sh", "/srcs/setup.sh"]
