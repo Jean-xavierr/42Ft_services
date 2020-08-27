@@ -121,7 +121,7 @@ function_docker_build()
 	for service in $services
 	do
 		printf "\n\n🤖 : docker build srcs/$service -t alpine_$service\n"
-		docker build srcs/$service -t alpine_$service
+		docker build srcs/$service -t alpine_$service .
 	done
 	printf "\n🤖 : ${Green}Images docker build${Default_color} 🐳\n"
 }
