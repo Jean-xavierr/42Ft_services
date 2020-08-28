@@ -17,6 +17,13 @@ spec:
       - name: mysql
         image: alpine_mysql
         imagePullPolicy: Never
+        env:
+        - name: WP_DB_NAME
+          value: "wordpress"
+        - name: WP_USER
+          value: "wp_user"
+        - name: PASSWORD
+          value: "password"
         ports:
         - containerPort: 3306
 ---
@@ -27,7 +34,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - name: http
+  - name: mysql
     port: 3306
     targetPort: 3306
     protocol: TCP
