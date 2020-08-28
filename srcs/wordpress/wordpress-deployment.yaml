@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-deployment
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        image: alpine_wordpress
+        imagePullPolicy: Never
+        env:
+        - name: WP_DB_NAME
+          value: "wordpress"
+        - name: WP_USER
+          value: "wp_user"
+        - name: PASSWORD
+          value: "password"
+        - name: MYSQL_IP
+          value: "172.17.0.6"
+        ports:
+        - containerPort: 5050
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-service
+spec:
+  type: LoadBalancer
+  ports:
+  - name: wordpress
+    port: 5050
+    targetPort: 5050
+    protocol: TCP
+  selector:
+    app: wordpress
