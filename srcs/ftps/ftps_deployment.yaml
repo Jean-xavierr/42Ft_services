@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps-deployment
+  labels:
+    app: ftps
+spec:
+  selector:
+    matchLabels:
+      app: ftps
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      containers:
+      - name: ftps
+        image: alpine_ftps
+        imagePullPolicy: Never
+        env:
+        - name: USER
+          value: "user"
+        - name: PASSWORD
+          value: "password"
+        ports:
+        - containerPort: 20
+        - containerPort: 21
+        - containerPort: 21000
+        - containerPort: 21001
+        - containerPort: 21002
+        - containerPort: 21003
+        - containerPort: 21004
+        - containerPort: 21005
+        - containerPort: 21006
+        - containerPort: 21007
+        - containerPort: 21008
+        - containerPort: 21009
+        - containerPort: 21010
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps-service
+spec:
+  type: LoadBalancer
+  ports:
+  - name: ftps
+    port: 20
+    targetPort: 20
+  - name: ftps-21
+    port: 21
+    targetPort: 21
+  - name: ftps-21000
+    port: 21000
+  - name: ftps-21001
+    port: 21001
+  - name: ftps-21002
+    port: 21002
+  - name: ftps-21003
+    port: 21003
+  - name: ftps-21004
+    port: 21004
+  - name: ftps-21005
+    port: 21005
+  - name: ftps-21006
+    port: 21006
+  - name: ftps-21007
+    port: 21007
+  - name: ftps-21008
+    port: 21008
+  - name: ftps-21009
+    port: 21009
+  - name: ftps-21010
+    port: 21010
+  selector:
+    app: ftps
