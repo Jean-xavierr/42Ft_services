@@ -37,7 +37,7 @@ EOF
 # touch /run/openrc/softlevel
 # /etc/init.d/mariadb setup
 # rc-service mariadb start
-# mysql -h ip -u wp_user -p
+# mysql -h $MYSQL_IP -u wp_user -p
 
 # PHP SERVER
 php -S 0.0.0.0:5050 -t /www/wordpress

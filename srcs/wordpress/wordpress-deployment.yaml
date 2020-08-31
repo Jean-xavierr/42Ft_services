@@ -25,7 +25,7 @@ spec:
         - name: PASSWORD
           value: "password"
         - name: MYSQL_IP
-          value: "172.17.0.6"
+          value: mysql-service.default.svc.cluster.local
         ports:
         - containerPort: 5050
 ---
