@@ -17,7 +17,13 @@ spec:
       - name: nginx
         image: alpine_nginx
         imagePullPolicy: Never
+        env:
+        - name: USER
+          value: "ssh_user"
+        - name: PASSWORD
+          value: "password"
         ports:
+        - containerPort: 22
         - containerPort: 80
         - containerPort: 443
 ---
@@ -28,6 +34,10 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
+  - name: ssh
+    port: 22
+    targetPort: 22
+    protocol: TCP
   - name: http
     port: 80
     targetPort: 80
