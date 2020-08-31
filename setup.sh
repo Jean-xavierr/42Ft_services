@@ -139,8 +139,11 @@ function_management_install()
 		# function_install_brew "$1"
 		# function_install_docker "$1"
 		# function_install_minikube $1
-		function_start_minikube
+		# function_start_minikube
 		function_docker_build
+		# function_install_metallb
+		# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+        # kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
 	fi
 }
 
@@ -156,7 +159,8 @@ function_main()
 {
 	# Visuel print
 	clear
-	printf "\n\n███████╗████████╗     ███████╗███████╗██████╗ ██╗   ██╗██╗ ██████╗███████╗███████╗
+	printf "\n\n
+███████╗████████╗     ███████╗███████╗██████╗ ██╗   ██╗██╗ ██████╗███████╗███████╗
 ██╔════╝╚══██╔══╝     ██╔════╝██╔════╝██╔══██╗██║   ██║██║██╔════╝██╔════╝██╔════╝
 █████╗     ██║        ███████╗█████╗  ██████╔╝██║   ██║██║██║     █████╗  ███████╗
 ██╔══╝     ██║        ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║██║     ██╔══╝  ╚════██║
