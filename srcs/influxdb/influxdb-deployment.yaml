@@ -32,7 +32,7 @@ kind: Service
 metadata:
   name: influxdb-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: influxdb
     port: 8086
