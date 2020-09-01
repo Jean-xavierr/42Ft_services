@@ -18,10 +18,16 @@ spec:
         image: alpine_nginx
         imagePullPolicy: Never
         env:
-        - name: USER
-          value: "ssh_user"
-        - name: PASSWORD
-          value: "password"
+          - name: USER
+            valueFrom:
+              secretKeyRef:
+                name: kubernetes-secret
+                key: ssh_user
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: kubernetes-secret
+                key: ssh_password
         ports:
         - containerPort: 22
         - containerPort: 80
