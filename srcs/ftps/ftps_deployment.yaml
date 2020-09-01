@@ -19,9 +19,15 @@ spec:
         imagePullPolicy: Never
         env:
         - name: USER
-          value: "user"
+          valueFrom:
+            secretKeyRef:
+              name: kubernetes-secret
+              key: ftps_password
         - name: PASSWORD
-          value: "password"
+          valueFrom:
+            secretKeyRef:
+              name: kubernetes-secret
+              key: ftps_password
         ports:
         - containerPort: 20
         - containerPort: 21
