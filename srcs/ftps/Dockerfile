@@ -6,7 +6,7 @@ RUN apk update \
 && apk add vsftpd && apk add openssl
 
 ADD ./vsftpd.conf		./etc/vsftpd/vsftpd.conf
-ADD ./setup_ftps.sh		./utils/setup_ftps.sh
+ADD ./setup_ftps.sh		./srcs/setup.sh
 
 # CONFIG OPENSSL
 RUN openssl req -x509 -nodes -subj '/C=FR/ST=PARIS/L=PARIS/O=jereligi/CN=localhost' \
@@ -15,4 +15,4 @@ RUN openssl req -x509 -nodes -subj '/C=FR/ST=PARIS/L=PARIS/O=jereligi/CN=localho
 
 EXPOSE 20 21 21000-21010
 
-CMD ./utils/setup_ftps.sh
+CMD ["sh", "/srcs/setup.sh"]
