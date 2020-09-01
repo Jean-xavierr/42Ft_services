@@ -19,11 +19,20 @@ spec:
         imagePullPolicy: Never
         env:
         - name: WP_DB_NAME
-          value: "wordpress"
+          valueFrom:
+            secretKeyRef:
+              name: kubernetes-secret
+              key: wp_db_name
         - name: WP_USER
-          value: "wp_user"
+          valueFrom:
+            secretKeyRef:
+              name: kubernetes-secret
+              key: wp_user
         - name: PASSWORD
-          value: "password"
+          valueFrom:
+            secretKeyRef:
+              name: kubernetes-secret
+              key: wp_password
         - name: MYSQL_IP
           value: mysql-service.default.svc.cluster.local
         ports:
