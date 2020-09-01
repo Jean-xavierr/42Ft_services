@@ -132,6 +132,12 @@ function_docker_build()
 	printf "\n🤖 : ${Green}Images docker build${Default_color} 🐳\n"
 }
 
+function_install_metallb()
+{
+	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+    kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+}
+
 function_management_install()
 {
 	if [ $1 == "42Mac" ]; then
@@ -139,11 +145,8 @@ function_management_install()
 		# function_install_brew "$1"
 		# function_install_docker "$1"
 		# function_install_minikube $1
-		# function_start_minikube
+		function_start_minikube
 		function_docker_build
-		# function_install_metallb
-		# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
-        # kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
 	fi
 }
 
