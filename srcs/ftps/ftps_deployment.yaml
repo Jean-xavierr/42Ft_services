@@ -22,7 +22,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: kubernetes-secret
-              key: ftps_password
+              key: ftps_user
         - name: PASSWORD
           valueFrom:
             secretKeyRef:
