@@ -123,7 +123,7 @@ function_start_minikube()
 
 function_docker_build()
 {
-	services="nginx ftps mysql wordpress phpmyadmin influxdb grafana"
+	services="nginx ftps mysql wordpress phpmyadmin influxdb grafana telegraf"
 	for service in $services
 	do
 		printf "\n\n🤖 : docker build -t alpine_$service srcs/$service\n"
