@@ -9,12 +9,14 @@ touch /run/openrc/softlevel
 /etc/init.d/mariadb setup
 rc-service mariadb start
 
-Create Database wordpress
-mysql -u root << EOF 
+# Create Database wordpress
+mysql << EOF 
 CREATE DATABASE $WP_DB_NAME;
 CREATE USER '$WP_USER'@'%' IDENTIFIED BY '$PASSWORD';
 GRANT ALL ON $WP_DB_NAME.* TO '$WP_USER'@'%' IDENTIFIED BY '$PASSWORD' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
+
+mysql -h localhost wordpress < /srcs/wordpress.sql
 
 tail -f /dev/null

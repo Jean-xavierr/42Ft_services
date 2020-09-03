@@ -6,6 +6,7 @@ RUN apk update \
 && apk add mariadb mariadb-client openrc
 
 ADD setup.sh 		/srcs/setup.sh
+ADD wordpress.sql /srcs/wordpress.sql
 
 EXPOSE 3306
 
