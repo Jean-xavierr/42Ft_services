@@ -1,0 +1,11 @@
+apiVersion: 1
+datasources:
+  - name: InfluxDB_Container_Services
+    type: influxdb
+    access: proxy
+    url: http://influxdb-service.default.svc.cluster.local:8086
+    database: "telegraf"
+    basicAuth: true
+    basicAuthUser: influxdb_user
+    basicAuthPassword: password
+    editable: true
