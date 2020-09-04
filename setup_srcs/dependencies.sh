@@ -2,12 +2,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    setup.sh                                           :+:      :+:    :+:    #
+#    dependencies.sh                                    :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jereligi <jereligi@student.42.fr>          +#+  +:+       +#+         #
+#    By: Jeanxavier <Jeanxavier@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/08/18 16:24:05 by jereligi          #+#    #+#              #
-#    Updated: 2020/08/20 13:44:08 by jereligi         ###   ########.fr        #
+#    Created: 2020/09/04 15:43:50 by Jeanxavier        #+#    #+#              #
+#    Updated: 2020/09/04 15:43:50 by Jeanxavier       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,9 @@ install_virtualbox()
 		printf "❗ : Please install ${Light_red}VirtualBox"
 		printf "for Mac from the MSC (Managed Software Center)${Default_color}\n"
 		open -a "Managed Software Center"
-		read -p ❗\ :\ Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ VirtualBox\ for\ Mac\ ...
-		printf "\n"
+		# read -p ❗\ :\ Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ VirtualBox\ for\ Mac\ ...
+		# printf "\n"
+		exit
 	fi
 }
 
@@ -77,9 +78,9 @@ install_docker()
 		printf "❗ : Please install ${Light_red}Docker"
 		printf "for Mac from the MSC (Managed Software Center)${Default_color}\n"
 		open -a "Managed Software Center"
-		read -p ❗\ :\ Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ Docker\ for\ Mac\ ...
-		move_docker_goinfre
-		# function_install_docker 
+		# read -p ❗\ :\ Press\ $'\033[0;34m'RETURN$'\033[0m'\ when\ you\ have\ successfully\ installed\ Docker\ for\ Mac\ ...
+		# move_docker_goinfre
+		exit
 	fi
 	printf "🐳 : Docker installed\n"
 }
@@ -105,7 +106,6 @@ move_minikube_goinfre()
 
 install_minikube()
 {
-
 	if [ "$(brew list | grep minikube)" != "minikube" ]; then
 		printf "🤖 : Install Minikube\n"
 		brew install minikube &> /dev/null & 
@@ -118,40 +118,12 @@ install_minikube()
 	printf "🐳 : Minikube installed\n"
 }
 
-start_minikube()
-{
-	minikube start --vm-driver=virtualbox --disk-size=5000MB
-	eval $(minikube docker-env)
-}
-
-kubernetes_build()
-{
-	printf "🐳 : kubectl apply $service deployment\n"
-	kubectl apply -f srcs/$service/"$service"-deployment.yaml > /dev/null
-}
-
-docker_build()
-{
-	services="ftps nginx mysql wordpress phpmyadmin influxdb grafana telegraf"
-	printf "\n\n"
-	for service in $services
-	do
-		printf "🤖 : docker build images $service\n"
-		docker build -t alpine_$service srcs/$service > /dev/null
-		# load_animation $!
-		kubernetes_build $service
-	done
-	printf "\n🤖 : ${Green}Images docker and kubernetes build${Default_color} 🐳\n"
-}
-
 install_dependencies_42mac()
 {
 	install_virtualbox
 	install_docker
 	install_brew
 	install_minikube
-	start_minikube
-	docker_build
 }
 
 main()

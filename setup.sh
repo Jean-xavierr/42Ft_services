@@ -55,8 +55,10 @@ parsing_argument()
 		if [ "$1" == "42Mac" ]; then
 			printf "🍎 : Function %s\n\n" "$1"
 			bash setup_srcs/dependencies.sh "$1"
+			bash setup_srcs/build_kubernetes.sh "$1"
 		elif [ "$1" == "42Linux" ]; then
 			printf "🐧 : Function %s\n\n" "$1"
+			bash setup_srcs/build_kubernetes.sh  "$1"
 		fi
 	fi
 }
