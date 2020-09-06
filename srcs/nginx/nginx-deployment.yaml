@@ -31,7 +31,9 @@ spec:
         livenessProbe:
           exec:
             command:
-            - service nginx status
+            - service
+            - nginx 
+            - status
           initialDelaySeconds: 5
           periodSeconds: 3
         ports:

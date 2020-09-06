@@ -1,7 +1,10 @@
-# Nginx start
+# Nginx starting
+set -x # Print commands and their arguments as they are executed
 openrc
 touch /run/openrc/softlevel
 service nginx start
+
+# SSH starting
 echo -e "$PASSWORD\n$PASSWORD" | adduser $USER
 rc-update add sshd
 rc-status
