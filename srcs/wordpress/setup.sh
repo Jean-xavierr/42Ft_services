@@ -1,3 +1,5 @@
+# Wordpress starting
+set -x # Print commands and their arguments as they are executed
 # Config wp-config.php (database mariadb)
 cat << EOF > /www/wordpress/wp-config.php
 <?php

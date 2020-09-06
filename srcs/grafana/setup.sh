@@ -1,3 +1,5 @@
+# Grafana starting
+set -x # Print commands and their arguments as they are executed
 cd /grafana/bin/
 ./grafana-server
 

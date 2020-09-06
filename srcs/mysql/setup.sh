@@ -1,3 +1,4 @@
+set -x # Print commands and their arguments as they are executed
 # Comment line start with 'skip-networking'
 mv /etc/my.cnf.d/mariadb-server.cnf /etc/my.cnf.d/old_mariadb-server.cnf
 sed 's/^skip-networking/#&/' /etc/my.cnf.d/old_mariadb-server.cnf > /etc/my.cnf.d/mariadb-server.cnf
@@ -17,6 +18,7 @@ GRANT ALL ON $WP_DB_NAME.* TO '$WP_USER'@'%' IDENTIFIED BY '$PASSWORD' WITH GRAN
 FLUSH PRIVILEGES;
 EOF
 
+# Add Database
 if [ ! -f /var/lib/mysql/wordpress ]; then
 	mysql -h localhost wordpress < /srcs/wordpress.sql
 fi
