@@ -28,6 +28,11 @@ spec:
             secretKeyRef:
               name: kubernetes-secret
               key: ftps_password
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - /srcs/livenessprod.sh
         ports:
         - containerPort: 20
         - containerPort: 21
