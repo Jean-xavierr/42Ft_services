@@ -31,7 +31,7 @@ Default_color="\e[39m"	#--------- Default color
 
 load_animation()
 {
-	sleep $1
+	sleep 3
 	spin='-\|/'
 	# i=0
 	while kill -0 $1 2>/dev/null

@@ -27,6 +27,7 @@ Default_color="\e[39m"	#--------- Default color
 
 start_minikube()
 {
+	minikube delete
 	minikube start --vm-driver=virtualbox --disk-size=5000MB
 	eval $(minikube docker-env)
 }
@@ -65,15 +66,15 @@ docker_build()
 		elif [ $service == "nginx" ]; then
 			printf "🎨 : "
 		elif [ $service == "mysql" ]; then
-			printf "🗃 : "
+			printf "🗃  : "
 		elif [ $service == "wordpress" ]; then
 			printf "🍱 : "
 		elif [ $service == "phpmyadmin" ]; then
 			printf "👥 : "
 		elif [ $service == "influxdb" ]; then
-			printf "🗃 : "
+			printf "🗃  : "
 		elif [ $service == "telegraf" ]; then
-			printf "⬆️ : "
+			printf "⬆️  : "
 		fi
 		printf "docker build images   [${Green}$service${Default_color}]\n"
 		docker build -t alpine_$service srcs/$service > /dev/null
@@ -86,23 +87,23 @@ display_service()
 	printf "\n🎉 : FT_SERVICES ${Green}READY${Default_color}\n"
 	echo " ---------------------------------------------------------------------------------------"
 	printf "| ${Blue}Wordpress${Default_color}	 | user: admin     | password: admin    | ip: http://"
-	kubectl get svc | grep wordpress-service | cut -d " " -f 10,13 | tr -d "\n" | tr -d " "
+	kubectl get svc | grep wordpress-service | cut -d " " -f 11,12,13 | tr -d "\n" | tr -d " "
 	printf ":5050  |\n"
 	echo " ---------------------------------------------------------------------------------------"
 	printf "| ${Yellow}PhpMyAdmin${Default_color}     | user: wp_user   | password: password | ip: http://"
-	kubectl get svc | grep phpmyadmin-service | cut -d " " -f 10,13 | tr -d "\n" | tr -d " "
+	kubectl get svc | grep phpmyadmin-service | cut -d " " -f 10,11,12 | tr -d "\n" | tr -d " "
 	printf ":5000  |\n"
 	echo " ---------------------------------------------------------------------------------------"
-	printf "| ${Green}Ftps${Default_color}           | user: ftps_user | password: password | ip:"
-	kubectl get svc | grep ftps-service | cut -d " " -f 15,16 | tr -d "\n"
+	printf "| ${Green}Ftps${Default_color}           | user: ftps_user | password: password | ip: "
+	kubectl get svc | grep ftps-service | cut -d " " -f 15,16,17,18 | tr -d "\n" | tr -d " "
 	printf ":21           |\n"
 	echo " ---------------------------------------------------------------------------------------"
 	printf "| ${Light_red}Grafana${Default_color}        | user: admin     | password: admin    | ip: http://"
-	kubectl get svc | grep grafana-service | cut -d " " -f 12,13 | tr -d "\n" | tr -d " "
+	kubectl get svc | grep grafana-service | cut -d " " -f 13,14,15 | tr -d "\n" | tr -d " "
 	printf ":3000  |\n"
 	echo " ---------------------------------------------------------------------------------------"
-	printf "| ${Orange}Nginx${Default_color}          | user:           | password:          | ip: https://"
-	kubectl get svc | grep nginx-service | cut -d " " -f 15,18 | tr -d "\n" | tr -d " "
+	printf "| ${Orange}Nginx${Default_color}          | user: ssh_user  | password: password | ip: https://"
+	kubectl get svc | grep nginx-service | cut -d " " -f 15,16,17 | tr -d "\n" | tr -d " "
 	printf ":443  |\n"
 	echo " ---------------------------------------------------------------------------------------"
 }
@@ -117,7 +118,13 @@ main()
 	# 	sed 's/-opasv_address=192.168.99.2/-opasv_address=192.168.99.2/' /srcs/ftps/setup_ftps.sh > /srcs/ftps/setup_ftps.sh
 	display_service
 	printf "\n🤖 : Minikube ${Light_red}Dashboard${Default_color}\n"
+	sleep 2
 	minikube dashboard
+	sleep 2
+	minikube dashboard
+	# if [ $! != "0" ]; then
+	# 	minikube dashboard
+	# fi 
 }
 
 main "$1"
