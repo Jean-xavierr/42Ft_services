@@ -50,7 +50,7 @@ spec:
         ports:
         - containerPort: 8086
         volumeMounts:
-          - mountPath: /srcs/influxdb-persistent-volume
+          - mountPath: /var/lib/influxdb
             name: influxdb-persistent-volume
       volumes:
        - name: influxdb-persistent-volume
