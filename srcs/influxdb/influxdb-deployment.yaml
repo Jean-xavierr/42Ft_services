@@ -47,6 +47,14 @@ spec:
             secretKeyRef:
               name: kubernetes-secret
               key: influxdb_password
+        livenessProbe:
+          exec:
+            command:
+            - service
+            - influxdb 
+            - status
+          initialDelaySeconds: 5
+          periodSeconds: 3
         ports:
         - containerPort: 8086
         volumeMounts:
