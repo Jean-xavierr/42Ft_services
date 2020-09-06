@@ -11,12 +11,13 @@ rc-service mariadb start
 
 # Create Database wordpress
 mysql << EOF 
-CREATE DATABASE $WP_DB_NAME;
+CREATE DATABASE IF NOT EXISTS $WP_DB_NAME;
 CREATE USER '$WP_USER'@'%' IDENTIFIED BY '$PASSWORD';
 GRANT ALL ON $WP_DB_NAME.* TO '$WP_USER'@'%' IDENTIFIED BY '$PASSWORD' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 
-mysql -h localhost wordpress < /srcs/wordpress.sql
-
+if [ ! -f /var/lib/mysql/wordpress ]; then
+	mysql -h localhost wordpress < /srcs/wordpress.sql
+fi
 tail -f /dev/null
