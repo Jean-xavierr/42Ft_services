@@ -47,6 +47,14 @@ spec:
             secretKeyRef:
               name: kubernetes-secret
               key: wp_password
+        livenessProbe:
+          exec:
+            command:
+            - service
+            - mariadb 
+            - status
+          initialDelaySeconds: 5
+          periodSeconds: 3
         ports:
         - containerPort: 3306
         volumeMounts:
