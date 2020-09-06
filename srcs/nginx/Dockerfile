@@ -6,8 +6,8 @@ RUN apk update && apk add openrc \
 && apk add nginx openssl openssh
 
 ADD nginx.conf /etc/nginx/nginx.conf
-ADD setup_nginx.sh setup_nginx.sh
-RUN chmod +x setup_nginx.sh
+ADD setup.sh setup.sh
+RUN chmod +x setup.sh
 RUN mkdir www
 ADD index.html /www/index.html
 
@@ -20,4 +20,4 @@ ADD sshd_config /etc/ssh/
 
 EXPOSE 22 80 443
 
-CMD ["sh", "./setup_nginx.sh"]
+CMD ["sh", "./setup.sh"]
