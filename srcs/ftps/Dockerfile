@@ -7,7 +7,7 @@ RUN apk update \
 
 ADD ./vsftpd.conf		./etc/vsftpd/vsftpd.conf
 ADD ./setup_ftps.sh		./srcs/setup.sh
-ADD ./livenessprod.sh	./srcs/livenessprod.sh
+ADD ./livenessprobe.sh	./srcs/livenessprobe.sh
 
 # CONFIG OPENSSL
 RUN openssl req -x509 -nodes -subj '/C=FR/ST=PARIS/L=PARIS/O=jereligi/CN=localhost' \

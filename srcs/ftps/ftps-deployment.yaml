@@ -32,7 +32,7 @@ spec:
           exec:
             command:
             - sh
-            - /srcs/livenessprod.sh
+            - /srcs/livenessprobe.sh
         ports:
         - containerPort: 20
         - containerPort: 21
