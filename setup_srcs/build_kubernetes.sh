@@ -32,6 +32,21 @@ start_minikube()
 	eval $(minikube docker-env)
 }
 
+install_addons_minikube()
+{
+	minikube addons enable metrics-server
+	minikube addons enable logviewer
+}
+
+run_minikube_dashboard()
+{
+	printf "\n🤖 : Minikube ${Light_red}Dashboard${Default_color}\n"
+	sleep 2
+	minikube dashboard
+	sleep 2
+	minikube dashboard
+}
+
 install_build_metallb_secret()
 {
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml > /dev/null
@@ -117,14 +132,8 @@ main()
 	# if [ $1 == "42Mac" ]; then
 	# 	sed 's/-opasv_address=192.168.99.2/-opasv_address=192.168.99.2/' /srcs/ftps/setup_ftps.sh > /srcs/ftps/setup_ftps.sh
 	display_service
-	printf "\n🤖 : Minikube ${Light_red}Dashboard${Default_color}\n"
-	sleep 2
-	minikube dashboard
-	sleep 2
-	minikube dashboard
-	# if [ $! != "0" ]; then
-	# 	minikube dashboard
-	# fi 
+	install_addons_minikube
+	run_minikube_dashboard
 }
 
 main "$1"
