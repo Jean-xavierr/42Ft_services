@@ -3,7 +3,7 @@ MAINTAINER Jereligi <jereligi@student.42.fr>
 
 # Install FTPS and dependencis
 RUN apk update \
-&& apk add vsftpd && apk add openssl
+&& apk add vsftpd && apk add openssl curl
 
 ADD ./vsftpd.conf		./etc/vsftpd/vsftpd.conf
 ADD ./setup_ftps.sh		./srcs/setup.sh

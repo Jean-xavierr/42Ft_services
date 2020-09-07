@@ -36,6 +36,14 @@ spec:
             - status
           initialDelaySeconds: 5
           periodSeconds: 3
+        livenessProbe:
+          exec:
+            command:
+            - service
+            - sshd 
+            - status
+          initialDelaySeconds: 5
+          periodSeconds: 3
         ports:
         - containerPort: 22
         - containerPort: 80

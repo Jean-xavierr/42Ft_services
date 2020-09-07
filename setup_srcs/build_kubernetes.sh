@@ -27,16 +27,17 @@ Default_color="\e[39m"	#--------- Default color
 
 start_minikube()
 {
-	minikube delete
+	# minikube delete
 	minikube start --vm-driver=virtualbox --disk-size=5000MB
 	eval $(minikube docker-env)
 }
 
 install_addons_minikube()
 {
-	sleep 2
+	sleep 3
 	minikube addons enable metrics-server
 	minikube addons enable logviewer
+	minikube addons enable metrics-server
 }
 
 run_minikube_dashboard()
@@ -127,13 +128,16 @@ display_service()
 main()
 {
 	start_minikube
+	install_addons_minikube
 	install_build_metallb_secret
 	docker_build
 	kubernetes_build
-	# if [ $1 == "42Mac" ]; then
-	# 	sed 's/-opasv_address=192.168.99.2/-opasv_address=192.168.99.2/' /srcs/ftps/setup_ftps.sh > /srcs/ftps/setup_ftps.sh
+	if [ $1 == "42Mac" ]; then
+		sed 's/172.17.0/192.168.99/g' srcs/ftps/setup_ftps.sh
+	elif [ $1 == "42Linux" ]; then
+		sed 's/192.168.99/172.17.0/g' srcs/ftps/setup_ftps.sh
+	fi
 	display_service
-	install_addons_minikube
 	run_minikube_dashboard
 }
 

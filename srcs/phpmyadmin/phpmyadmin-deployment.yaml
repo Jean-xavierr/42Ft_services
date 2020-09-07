@@ -21,10 +21,14 @@ spec:
         - name: MYSQL_IP
           value: mysql-service.default.svc.cluster.local
         livenessProbe:
-          exec:
-            command:
-            - sh
-            - /srcs/livenessprobe.sh
+          httpGet:
+            path: /
+            port: 5000
+            httpHeaders:
+            - name: Custom-Header
+              value: Awesome
+          initialDelaySeconds: 3
+          periodSeconds: 3
         ports:
         - containerPort: 5000
 ---
