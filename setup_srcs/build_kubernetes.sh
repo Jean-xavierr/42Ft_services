@@ -33,6 +33,7 @@ start_minikube()
 		eval $(minikube docker-env)
 	elif [ $1 == "42Linux" ]; then
 		minikube start --vm-driver=docker
+		sudo chown -R user42 $HOME/.kube $HOME/.minikube
 		eval $(minikube docker-env)
 	fi
 }
@@ -137,10 +138,12 @@ main()
 	install_build_metallb_secret
 	docker_build
 	kubernetes_build
-	if [ $1 == "42Mac" ]; then
-		sed 's/172.17.0/192.168.99/g' srcs/ftps/setup_ftps.sh
-	elif [ $1 == "42Linux" ]; then
-		sed 's/192.168.99/172.17.0/g' srcs/ftps/setup_ftps.sh
+	if [ "$1" == "42Mac" ]; then
+		sed -i 's/172.17.0/192.168.99/g' srcs/ftps/setup_ftps.sh
+		sed -i 's/172.17.0/192.168.99/g' srcs/config/metallb.yaml
+	elif [ "$1" == "42Linux" ]; then
+		sed -i 's/192.168.99/172.17.0/g' srcs/ftps/setup_ftps.sh
+		sed -i 's/192.168.99/172.17.0/g' srcs/config/metallb.yaml
 	fi
 	display_service
 	run_minikube_dashboard
