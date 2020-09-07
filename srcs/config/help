@@ -6,7 +6,7 @@
 #    By: jereligi <jereligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/11 14:32:28 by jereligi          #+#    #+#              #
-#    Updated: 2020/09/06 16:05:42 by jereligi         ###   ########.fr        #
+#    Updated: 2020/09/07 10:10:56 by jereligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,11 @@ minikube start --vm-driver=virtualbox --disk-size=5000MB
 minikube dashboard
 eval $(minikube docker-env)
 
-curl --ftp-ssl --insecure --user ftps_user:password ftp://192.168.99.2:21
 
+
+curl --ftp-ssl --insecure --user ftps_user:password ftp://192.168.99.2:21
+ssh user@ip -p port
+ssh-keygen -R adresse-ip-du-serveur
 
 # Docker
 - build image
