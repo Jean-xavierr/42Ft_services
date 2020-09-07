@@ -30,10 +30,11 @@ start_minikube()
 	minikube delete
 	if [ $1 == "42Mac" ]; then
 		minikube start --vm-driver=virtualbox --disk-size=5000MB
+		eval $(minikube docker-env)
 	elif [ $1 == "42Linux" ]; then
-		minikube start --vm-driver=virtualbox --disk-size=5000MB
+		minikube start --vm-driver=docker
+		eval $(sudo minikube docker-env)
 	fi
-	eval $(minikube docker-env)
 }
 
 install_addons_minikube()
