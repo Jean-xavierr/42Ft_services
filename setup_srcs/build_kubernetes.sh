@@ -27,8 +27,12 @@ Default_color="\e[39m"	#--------- Default color
 
 start_minikube()
 {
-	# minikube delete
-	minikube start --vm-driver=virtualbox --disk-size=5000MB
+	minikube delete
+	if [ $1 == "42Mac" ]; then
+		minikube start --vm-driver=virtualbox --disk-size=5000MB
+	elif [ $1 == "42Linux" ]; then
+		minikube start --vm-driver=virtualbox --disk-size=5000MB
+	fi
 	eval $(minikube docker-env)
 }
 
@@ -127,7 +131,7 @@ display_service()
 
 main()
 {
-	start_minikube
+	start_minikube $1
 	install_addons_minikube
 	install_build_metallb_secret
 	docker_build
