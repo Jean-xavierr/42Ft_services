@@ -33,7 +33,7 @@ start_minikube()
 		eval $(minikube docker-env)
 	elif [ $1 == "42Linux" ]; then
 		minikube start --vm-driver=docker
-		eval $(sudo minikube docker-env)
+		eval $(minikube docker-env)
 	fi
 }
 
@@ -132,7 +132,7 @@ display_service()
 
 main()
 {
-	start_minikube $1
+	start_minikube "$1"
 	install_addons_minikube
 	install_build_metallb_secret
 	docker_build

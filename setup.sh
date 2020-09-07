@@ -58,8 +58,8 @@ parsing_argument()
 			bash setup_srcs/build_kubernetes.sh "$1"
 		elif [ "$1" == "42Linux" ]; then
 			printf "🐧 : Function %s\n\n" "$1"
-			sudo usermod -aG docker user42; newgrp docker
-			# sudo chmod 666 /var/run/docker.sock
+			sudo usermod -aG docker user42
+			# echo "user42\nuser42" | sudo -S chmod 666 /var/run/docker.sockd
 			# sudo apt install fonts-noto-color-emoji > /dev/null
 			bash setup_srcs/build_kubernetes.sh  "$1"
 		fi
