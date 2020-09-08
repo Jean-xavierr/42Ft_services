@@ -140,7 +140,7 @@ main()
 		sed -i 's/172.17.0/192.168.99/g' srcs/config/metallb.yaml
 		sed -i 's/172.17.0/192.168.99/g' srcs/mysql/srcs/wordpress.sql
 	elif [ $1 == "42Linux" ]; then
-		sed -i 's/192.168.99/172.17.0/g' srcs/ftps/srcs/setup_ftps.sh
+		sed -i 's/192.168.99/172.17.0/g' srcs/ftps/srcs/setup.sh
 		sed -i 's/192.168.99/172.17.0/g' srcs/config/metallb.yaml
 		sed -i 's/192.168.99/172.17.0/g' srcs/mysql/srcs/wordpress.sql
 	fi
