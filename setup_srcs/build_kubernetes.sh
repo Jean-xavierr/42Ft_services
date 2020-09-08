@@ -136,12 +136,13 @@ main()
 	start_minikube "$1"
 	install_addons_minikube
 	if [ $1 == "42Mac" ]; then
-		sed -i 's/172.17.0/192.168.99/g' srcs/ftps/setup_ftps.sh
+		sed -i 's/172.17.0/192.168.99/g' srcs/ftps/srcs/setup.sh
 		sed -i 's/172.17.0/192.168.99/g' srcs/config/metallb.yaml
+		sed -i 's/172.17.0/192.168.99/g' srcs/mysql/srcs/wordpress.sql
 	elif [ $1 == "42Linux" ]; then
-		sed -i 's/192.168.99/172.17.0/g' srcs/ftps/setup_ftps.sh
+		sed -i 's/192.168.99/172.17.0/g' srcs/ftps/srcs/setup_ftps.sh
 		sed -i 's/192.168.99/172.17.0/g' srcs/config/metallb.yaml
-		sed -i 's/192.168.99/172.17.0/g' srcs/mysql/wordpress.sql
+		sed -i 's/192.168.99/172.17.0/g' srcs/mysql/srcs/wordpress.sql
 	fi
 	install_build_metallb_secret
 	docker_build
