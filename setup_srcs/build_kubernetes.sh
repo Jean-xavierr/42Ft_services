@@ -114,7 +114,7 @@ display_service()
 	printf ":5050  |\n"
 	echo " ---------------------------------------------------------------------------------------"
 	printf "| ${Yellow}PhpMyAdmin${Default_color}     | user: wp_user   | password: password | ip: http://"
-	kubectl get svc | grep phpmyadmin-service | cut -d " " -f 10,11,12,13 | tr -d "\n" | tr -d " "
+	kubectl get svc | grep phpmyadmin-service | cut -d " " -f 10,11,12 | tr -d "\n" | tr -d " "
 	printf ":5000  |\n"
 	echo " ---------------------------------------------------------------------------------------"
 	printf "| ${Green}Ftps${Default_color}           | user: ftps_user | password: password | ip: "

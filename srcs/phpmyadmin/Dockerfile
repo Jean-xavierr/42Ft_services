@@ -14,8 +14,9 @@ RUN wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-a
 && mkdir www/ \
 && cd www/ && mkdir phpmyadmin 
 
-ADD setup.sh 			/srcs/setup.sh
-ADD config.inc.php		/www/phpmyadmin
+ADD /srcs/setup.sh 				/srcs/setup.sh
+ADD /srcs/config.inc.php		/www/phpmyadmin
+ADD /srcs/livenessprobe.sh		/srcs/livenessprobe.sh
 
 EXPOSE 5000
 

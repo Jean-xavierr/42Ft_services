@@ -36,13 +36,11 @@ spec:
         - name: MYSQL_IP
           value: mysql-service.default.svc.cluster.local
         livenessProbe:
-          httpGet:
-            path: /
-            port: 5050
-            httpHeaders:
-            - name: Custom-Header
-              value: Awesome
-          initialDelaySeconds: 3
+          exec:
+            command:
+            - /bin/ash
+            - /srcs/livenessprobe.sh
+          initialDelaySeconds: 5
           periodSeconds: 3
         ports:
         - containerPort: 5050

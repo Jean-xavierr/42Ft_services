@@ -5,8 +5,8 @@ MAINTAINER Jereligi <jereligi@student.42.fr>
 RUN apk update \
 && apk add mariadb mariadb-client openrc
 
-ADD setup.sh 		/srcs/setup.sh
-ADD wordpress.sql /srcs/wordpress.sql
+ADD /srcs/setup.sh 			/srcs/setup.sh
+ADD /srcs/wordpress.sql		/srcs/wordpress.sql
 
 EXPOSE 3306
 

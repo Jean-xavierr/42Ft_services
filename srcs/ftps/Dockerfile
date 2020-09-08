@@ -5,9 +5,9 @@ MAINTAINER Jereligi <jereligi@student.42.fr>
 RUN apk update \
 && apk add vsftpd && apk add openssl curl
 
-ADD ./vsftpd.conf		./etc/vsftpd/vsftpd.conf
-ADD ./setup_ftps.sh		./srcs/setup.sh
-ADD ./livenessprobe.sh	./srcs/livenessprobe.sh
+ADD /srcs/vsftpd.conf			/etc/vsftpd/vsftpd.conf
+ADD /srcs/setup.sh				/srcs/setup.sh
+ADD /srcs/livenessprobe.sh		/srcs/livenessprobe.sh
 
 # CONFIG OPENSSL
 RUN openssl req -x509 -nodes -subj '/C=FR/ST=PARIS/L=PARIS/O=jereligi/CN=localhost' \

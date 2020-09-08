@@ -33,7 +33,7 @@ spec:
             command:
             - sh
             - /srcs/livenessprobe.sh
-          initialDelaySeconds: 5
+          initialDelaySeconds: 15
           periodSeconds: 3
         ports:
         - containerPort: 20

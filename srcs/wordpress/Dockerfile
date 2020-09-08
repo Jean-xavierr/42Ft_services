@@ -13,7 +13,8 @@ RUN wget https://wordpress.org/latest.tar.gz \
 && mkdir /www \
 && mv wordpress/ www/
 
-ADD setup.sh 	/srcs/setup.sh
+ADD /srcs/setup.sh 			/srcs/setup.sh
+ADD /srcs/livenessprobe.sh	/srcs/livenessprobe.sh
 
 EXPOSE 5050
 

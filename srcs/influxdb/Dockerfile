@@ -14,7 +14,7 @@ RUN apk add openrc influxdb
 # # Required by telegraf
 # RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 
-ADD setup.sh /srcs/setup.sh
+ADD /srcs/setup.sh 		/srcs/setup.sh
 
 EXPOSE 8086
 
