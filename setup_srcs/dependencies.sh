@@ -71,8 +71,8 @@ install_docker()
 	if [ -d "/Applications/Docker.app" ]; then
 		if [ "$(ls -la ~ | grep .docker | cut -d " " -f 18-99)" != ".docker -> /Volumes/Storage/goinfre/$USER/docker/.docker" ] || [ ! -d "/Volumes/Storage/goinfre/$USER/.docker" ]; then
 			move_docker_goinfre
-		else
-			open -a Docker && sleep 5
+		# else
+		# 	# open -a Docker && sleep 5
 		fi
 	else
 		printf "❗ : Please install ${Light_red}Docker"
