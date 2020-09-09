@@ -151,7 +151,7 @@ For the 42VM, no dependencies are necessary, but some configuration at the ip le
 5. Automation of Docker image builds in the bash script.
 6. Automation of deployments in minikube in the bash script.
 7. Test your program regularly this is important !
-8. Checking the health status of services with [livenessprobe][https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/]
+8. Checking the health status of services with livenessprobe
 9. Last script settings
 10. Be proud of your project and of yourself
 
@@ -160,6 +160,7 @@ For the 42VM, no dependencies are necessary, but some configuration at the ip le
 - [Google is your best friend](https://www.google.com/) 
 but here are some basic installation documentation
 - [Kubernetes Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+- [Liveness Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
 - [Metallb](https://metallb.universe.tf/installation/)
 - [Nginx](https://wiki.alpinelinux.org/wiki/Nginx)
 - [MYSQL](https://wiki.alpinelinux.org/wiki/MariaDB)
